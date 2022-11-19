@@ -15,5 +15,6 @@ namespace CarRentProj.Data
         }
 
         public DbSet<CarRentProj.Models.Car> Car { get; set; } = default!;
+        public DbSet<CarRentProj.Models.Make> Make { get; set; } = default!;
     }
 }

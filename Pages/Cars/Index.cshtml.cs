@@ -19,7 +19,7 @@ namespace CarRentProj.Pages.Cars
             _context = context;
         }
 
-        public IList<Car> Car { get;set; } 
+        public IList<Car> Car { get;set; }
 
         public async Task OnGetAsync()
         {

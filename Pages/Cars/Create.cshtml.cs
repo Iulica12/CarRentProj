@@ -25,7 +25,7 @@ namespace CarRentProj.Pages.Cars
         }
 
         [BindProperty]
-        public Car Car { get; set; }
+        public Car Car { get; set; } 
         
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD

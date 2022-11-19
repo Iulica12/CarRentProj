@@ -20,7 +20,7 @@ namespace CarRentProj.Pages.Cars
         }
 
         [BindProperty]
-      public Car Car { get; set; }
+      public Car Car { get; set; } 
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

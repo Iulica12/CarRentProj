@@ -11,8 +11,7 @@ namespace CarRentProj.Models
         [Required]
         [StringLength(150, ErrorMessage = "Name is too long")]
         public string Model { get ; set ; }
-        [Required]
-        public int MakeId { get; set; }
+        public int? MakeId { get; set; }
         public virtual Make Make { get; set; }
     }
 }

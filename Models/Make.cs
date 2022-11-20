@@ -2,11 +2,12 @@
 
 namespace CarRentProj.Models
 {
-    public class Make
+    public class Make : BaseDomainEntity
     {
-        public int Id { get; set; }
-        [DisplayName("Name")]
+        [DisplayName("Make")]
         public string MakeName { get; set; }
+
         public virtual List<Car>? Car { get; set; }
+        public virtual List<CarModel>? CarModels { get; set; }
     }
 }

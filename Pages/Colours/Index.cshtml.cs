@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CarRentProj.Data;
 using CarRentProj.Models;
 
-namespace CarRentProj.Pages.Cars
+namespace CarRentProj.Pages.Colours
 {
     public class IndexModel : PageModel
     {
@@ -19,13 +19,13 @@ namespace CarRentProj.Pages.Cars
             _context = context;
         }
 
-        public IList<Car> Car { get;set; }
+        public IList<Colour> Colour { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            if (_context.Car != null)
+            if (_context.Colours != null)
             {
-                Car = await _context.Car.Include(b=>b.Make).Include(m => m.CarModel).Include(c => c.Colour).ToListAsync();
+                Colour = await _context.Colours.ToListAsync();
             }
         }
     }

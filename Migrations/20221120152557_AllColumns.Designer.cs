@@ -4,6 +4,7 @@ using CarRentProj.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarRentProj.Migrations
 {
     [DbContext(typeof(CarRentProjContext))]
-    partial class CarRentProjContextModelSnapshot : ModelSnapshot
+    [Migration("20221120152557_AllColumns")]
+    partial class AllColumns
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,16 +74,11 @@ namespace CarRentProj.Migrations
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("MakeId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MakeId");
 
                     b.ToTable("CarModels");
                 });
@@ -149,15 +146,6 @@ namespace CarRentProj.Migrations
 
             modelBuilder.Entity("CarRentProj.Models.CarModel", b =>
                 {
-                    b.HasOne("CarRentProj.Models.Make", "Make")
-                        .WithMany("CarModels")
-                        .HasForeignKey("MakeId");
-
-                    b.Navigation("Make");
-                });
-
-            modelBuilder.Entity("CarRentProj.Models.CarModel", b =>
-                {
                     b.Navigation("Car");
                 });
 
@@ -169,8 +157,6 @@ namespace CarRentProj.Migrations
             modelBuilder.Entity("CarRentProj.Models.Make", b =>
                 {
                     b.Navigation("Car");
-
-                    b.Navigation("CarModels");
                 });
 #pragma warning restore 612, 618
         }

@@ -8,9 +8,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CarRentProj.Data;
 using CarRentProj.Models;
-using System.Drawing;
 
-namespace CarRentProj.Pages.Cars
+namespace CarRentProj.Pages.CarModels
 {
     public class EditModel : PageModel
     {
@@ -22,27 +21,23 @@ namespace CarRentProj.Pages.Cars
         }
 
         [BindProperty]
-        public Car Car { get; set; }
+        public CarModel CarModel { get; set; } = default!;
         public SelectList Make { get; set; } = default!;
-        public SelectList Models { get; set; } = default!;
-        public SelectList Colours { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Car == null)
+            if (id == null || _context.CarModels == null)
             {
                 return NotFound();
             }
 
-            var car =  await _context.Car.FirstOrDefaultAsync(m => m.Id == id);
-            if (car == null)
+            var carmodel =  await _context.CarModels.FirstOrDefaultAsync(m => m.Id == id);
+            if (carmodel == null)
             {
                 return NotFound();
             }
-            Car = car;
+            CarModel = carmodel;
             Make = new SelectList(_context.Make.ToList(), "Id", "MakeName");
-            Models = new SelectList(_context.CarModels.ToList(), "Id", "Name");
-            Colours = new SelectList(_context.Colours.ToList(), "Id", "Name");
             return Page();
         }
 
@@ -53,12 +48,10 @@ namespace CarRentProj.Pages.Cars
             if (!ModelState.IsValid)
             {
                 Make = new SelectList(_context.Make.ToList(), "Id", "MakeName");
-                Models = new SelectList(_context.CarModels.ToList(), "Id", "Name");
-                Colours = new SelectList(_context.Colours.ToList(), "Id", "Name");
                 return Page();
             }
 
-            _context.Attach(Car).State = EntityState.Modified;
+            _context.Attach(CarModel).State = EntityState.Modified;
 
             try
             {
@@ -66,7 +59,7 @@ namespace CarRentProj.Pages.Cars
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CarExists(Car.Id))
+                if (!CarModelExists(CarModel.Id))
                 {
                     return NotFound();
                 }
@@ -79,9 +72,9 @@ namespace CarRentProj.Pages.Cars
             return RedirectToPage("./Index");
         }
 
-        private bool CarExists(int id)
+        private bool CarModelExists(int id)
         {
-          return _context.Car.Any(e => e.Id == id);
+          return _context.CarModels.Any(e => e.Id == id);
         }
     }
 }

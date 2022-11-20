@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using CarRentProj.Data;
 using CarRentProj.Models;
 
-namespace CarRentProj.Pages.Cars
+namespace CarRentProj.Pages.Colours
 {
     public class CreateModel : PageModel
     {
@@ -19,32 +19,24 @@ namespace CarRentProj.Pages.Cars
             _context = context;
         }
 
-        [BindProperty]
-        public Car Car { get; set; }
-        public SelectList Make { get; set; } = default!;
-        public SelectList Models { get; set; } = default!;
-        public SelectList Colours { get; set; } = default!;
-
         public IActionResult OnGet()
         {
-            Make = new SelectList(_context.Make.ToList(), "Id", "MakeName");
-            Models = new SelectList(_context.CarModels.ToList(), "Id", "Name");
-            Colours = new SelectList(_context.Colours.ToList(), "Id", "Name");
             return Page();
         }
+
+        [BindProperty]
+        public Colour Colour { get; set; }
+        
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+          if (!ModelState.IsValid)
             {
-                Make = new SelectList(_context.Make.ToList(), "Id", "MakeName");
-                Models = new SelectList(_context.CarModels.ToList(), "Id", "Name");
-                Colours = new SelectList(_context.Colours.ToList(), "Id", "Name");
                 return Page();
             }
 
-            _context.Car.Add(Car);
+            _context.Colours.Add(Colour);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

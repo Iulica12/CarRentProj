@@ -43,7 +43,8 @@ namespace CarRentProj.Migrations
                 column: "MakeId",
                 principalTable: "Make",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Cascade
+                );
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

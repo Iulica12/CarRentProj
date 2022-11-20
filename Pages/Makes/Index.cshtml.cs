@@ -25,7 +25,7 @@ namespace CarRentProj.Pages.Makes
         {
             if (_context.Make != null)
             {
-                Make = await _context.Make.ToListAsync();
+                Make = await _context.Make.Include(c => c.Car).ToListAsync();
             }
         }
     }

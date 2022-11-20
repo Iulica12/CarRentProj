@@ -26,8 +26,8 @@ namespace CarRentProj.Pages.Makes
 
         [BindProperty]
         public Make Make { get; set; }
+        public Car Car { get; set; }
         
-
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {

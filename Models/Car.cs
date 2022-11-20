@@ -8,10 +8,9 @@ namespace CarRentProj.Models
         [Required]
         [Range(1990, 2022)]
         public int Year { get; set; }
-        [Required]
         [StringLength(150, ErrorMessage = "Name is too long")]
         public string Model { get ; set ; }
         public int? MakeId { get; set; }
-        public virtual Make Make { get; set; }
+        public virtual Make? Make { get; set; }
     }
 }

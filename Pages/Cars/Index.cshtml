@@ -13,11 +13,14 @@
 <table class="table">
     <thead>
         <tr>
-            @*<th>
-                @Html.DisplayNameFor(model => model.Car[0].Year)
-            </th>*@
             <th>
-               @* @Html.DisplayNameFor(model => model.Car[0].Name)*@
+                @Html.DisplayNameFor(model => model.Car[0].Year)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Car[0].Make.MakeName)
+            </th>
+            <th>
+               @Html.DisplayNameFor(model => model.Car[0].Model)
             </th>
             <th></th>
         </tr>
@@ -25,11 +28,14 @@
     <tbody>
 @foreach (var item in Model.Car) {
         <tr>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.Year)
-            </td>*@
             <td>
-               @* @Html.DisplayFor(modelItem => item.Name)*@
+                @Html.DisplayFor(modelItem => item.Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Make.MakeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
             </td>
             <td>
                 <a class = "btn btn-warning" asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |

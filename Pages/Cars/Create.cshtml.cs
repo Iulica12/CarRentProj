@@ -18,19 +18,21 @@ namespace CarRentProj.Pages.Cars
         {
             _context = context;
         }
+
         [BindProperty]
         public Car Car { get; set; }
-        public SelectList Makes { get; set; }
+        public SelectList Make { get; set; } = default!;
+
         public IActionResult OnGet()
         {
-            Makes = new SelectList(_context.Make.ToList(), "Id", "MakeName");
+            Make = new SelectList(_context.Make.ToList(), "Id", "MakeName");
             return Page();
         }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return Page();
             }

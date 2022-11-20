@@ -25,7 +25,7 @@ namespace CarRentProj.Pages.Cars
         {
             if (_context.Car != null)
             {
-                Car = await _context.Car.ToListAsync();
+                Car = await _context.Car.Include(b=>b.Make).ToListAsync();
             }
         }
     }

@@ -22,6 +22,7 @@ namespace CarRentProj.Pages.Cars
 
         [BindProperty]
         public Car Car { get; set; }
+        public SelectList Make { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -36,6 +37,7 @@ namespace CarRentProj.Pages.Cars
                 return NotFound();
             }
             Car = car;
+            Make = new SelectList(_context.Make.ToList(), "Id", "MakeName");
             return Page();
         }
 

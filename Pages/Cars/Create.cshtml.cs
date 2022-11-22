@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CarRentProj.Data;
 using CarRentProj.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CarRentProj.Pages.Cars
 {
@@ -48,6 +49,14 @@ namespace CarRentProj.Pages.Cars
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
+        }
+        //pt dropdown
+        public Task<JsonResult> OnGetCarModels(int makeId)
+        {
+            var models = _context.CarModels
+                .Where(x => x.MakeId == makeId)
+                .ToListAsync();
+            return Task.FromResult(new JsonResult(models));
         }
     }
 }

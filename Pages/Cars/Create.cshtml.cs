@@ -51,12 +51,12 @@ namespace CarRentProj.Pages.Cars
             return RedirectToPage("./Index");
         }
         //pt dropdown
-        public Task<JsonResult> OnGetCarModels(int makeId)
+        public async Task<JsonResult> OnGetCarModels(int makeId)
         {
-            var models = _context.CarModels
+            var models = await _context.CarModels
                 .Where(x => x.MakeId == makeId)
                 .ToListAsync();
-            return Task.FromResult(new JsonResult(models));
+            return new JsonResult(models);
         }
     }
 }

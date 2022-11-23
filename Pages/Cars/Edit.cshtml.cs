@@ -83,5 +83,14 @@ namespace CarRentProj.Pages.Cars
         {
           return _context.Car.Any(e => e.Id == id);
         }
+        //pt dropdown
+        public async Task<JsonResult> OnGetCarModels(int makeId)
+        {
+            var models = await _context.CarModels
+                .Where(x => x.MakeId == makeId)
+                .ToListAsync();
+            return new JsonResult(models);
+        }
     }
+   
 }

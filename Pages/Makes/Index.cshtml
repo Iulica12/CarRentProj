@@ -1,4 +1,4 @@
-﻿@page
+﻿@page 
 @model CarRentProj.Pages.Makes.IndexModel
 
 @{
@@ -20,12 +20,18 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Make) {
-        <tr>
+@foreach (var item in Model.MakeData.Makes) {
+            string selectedRow = "";
+            if (item.Id == Model.MakeID) 
+            { 
+                selectedRow = "table-success"; 
+            }
+            <tr class="@selectedRow">
             <td>
                 @Html.DisplayFor(modelItem => item.MakeName)
             </td>
             <td>
+                <a asp-page="./Index" asp-route-id="@item.Id">Select</a> |
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
@@ -34,3 +40,26 @@
 }
     </tbody>
 </table>
+@if (Model.MakeData.CarModels != null)
+{
+     <h3>Models designed by Selected Maker</h3>
+    <table class="table">
+        @foreach (var item in Model.MakeData.Makes)
+        {
+            string selectedRow = ""; 
+            if (item.Id == Model.MakeID) 
+            { selectedRow = "table-success"; }
+            <tr class="@selectedRow">
+                <td>
+                    @{
+                        foreach (var b in item.CarModels)
+                        {
+                            @b.Name 
+                            <br />
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}

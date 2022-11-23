@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using CarRentProj.Data;
 using CarRentProj.Models;
+using System.Security.Policy;
+using CarRentProj.Models.ViewModels;
 
 namespace CarRentProj.Pages.Makes
 {
@@ -20,13 +22,28 @@ namespace CarRentProj.Pages.Makes
         }
 
         public IList<Make> Make { get;set; } = default!;
-
-        public async Task OnGetAsync()
+        public MakeIndexData MakeData { get; set; }
+        public int MakeID { get; set; }
+        public int CarModelID { get; set; }
+        public async Task OnGetAsync(int? id, int? carModelID)
         {
+            MakeData = new MakeIndexData();
+            MakeData.Makes = await _context.Make
+                                   .Include(i => i.CarModels)
+                                   .OrderBy(i => i.MakeName)
+                                   .ToListAsync();
+            if (id != null)
+            {
+                MakeID = id.Value;
+                Make make = MakeData.Makes.Where(i => i.Id == id.Value).Single();
+                MakeData.CarModels = make.CarModels;
+            }
             if (_context.Make != null)
             {
                 Make = await _context.Make.Include(c => c.Car).ToListAsync();
             }
         }
+
+
     }
 }

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using CarRentProj.Data;
 using CarRentProj.Models;
+using CarRentProj.Migrations;
+using CarRentProj.Models.ViewModels;
 
 namespace CarRentProj.Pages.Cars
 {
@@ -20,12 +22,34 @@ namespace CarRentProj.Pages.Cars
         }
 
         public IList<Car> Car { get;set; }
+        public CarModelIndexData CarD { get; set; }
+        public string YearSort { get; set; }
+        public string MakeSort { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string sortOrder)
         {
+            CarD = new CarModelIndexData();
+            MakeSort = String.IsNullOrEmpty(sortOrder) ? "Make_asc" : "";
+            YearSort = String.IsNullOrEmpty(sortOrder) ? "Year_desc" : "";
+            CarD.Cars = await _context.Car
+                .Include(b => b.CarModel)
+                .Include(b => b.Make)
+                .Include(b => b.Colour)
+                .AsNoTracking()
+                .OrderBy(b => b.Year)
+                .ToListAsync();
             if (_context.Car != null)
             {
-                Car = await _context.Car.Include(b=>b.Make).Include(m => m.CarModel).Include(c => c.Colour).ToListAsync();
+                //Car = await _context.Car.Include(b=>b.Make).Include(m => m.CarModel).Include(c => c.Colour).ToListAsync();
+            }
+            switch (sortOrder)
+            {
+                case "Make_asc":
+                    CarD.Cars = CarD.Cars.OrderBy(s=>s.Make.MakeName);
+                    break;
+                case "Year_desc":
+                    CarD.Cars = CarD.Cars.OrderByDescending(s => s.Year);
+                    break;
             }
         }
     }

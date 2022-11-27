@@ -48,9 +48,9 @@
                     @Html.DisplayFor(modelItem => item.Colour.Name)
                 </td>
             <td>
-                <a class = "btn btn-warning" asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a class="btn btn-info" asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                    <a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                <a class = "btn" asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a class="btn" asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                    <a class="btn" asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }

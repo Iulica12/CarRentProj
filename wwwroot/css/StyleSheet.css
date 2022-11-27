@@ -323,3 +323,69 @@ h1 {
         font-size: 8vh;
     }
 }
+/*Adaugare stiliare tabele*/
+table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    min-width: 400px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+}
+table th,table td {
+    padding: 12px 15px;
+}
+table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+/*create button*/
+/* CSS */
+.btn {
+    background: #FF4742;
+    border: 1px solid #FF4742;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 16px;
+    min-height: 40px;
+    outline: 0;
+    padding: 12px 14px;
+    text-align: center;
+    text-rendering: geometricprecision;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+}
+
+.btn:hover,
+.btn:active {
+    background-color: initial;
+    background-position: 0 0;
+    color: #FF4742;
+}
+
+.btn:active {
+    opacity: .5;
+}

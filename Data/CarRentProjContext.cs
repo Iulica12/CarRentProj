@@ -18,5 +18,8 @@ namespace CarRentProj.Data
         public DbSet<CarRentProj.Models.Make> Make { get; set; }
         public DbSet<CarRentProj.Models.CarModel> CarModels { get; set; }
         public DbSet<CarRentProj.Models.Colour> Colours { get; set; }
+        public DbSet<CarRentProj.Models.Member> Member { get; set; }
+        public DbSet<CarRentProj.Models.Rent> Rent { get; set; }
+       // public DbSet<CarRentProj.Models.Member> Member { get; set; }
     }
 }

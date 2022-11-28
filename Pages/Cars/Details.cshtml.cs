@@ -28,7 +28,7 @@ namespace CarRentProj.Pages.Cars
                 return NotFound();
             }
 
-            var car = await _context.Car.Include(m => m.Make).FirstOrDefaultAsync(m => m.Id == id);
+            var car = await _context.Car.Include(m => m.Make).Include(m=>m.Colour).Include(m=>m.CarModel).FirstOrDefaultAsync(m => m.Id == id);
             if (car == null)
             {
                 return NotFound();

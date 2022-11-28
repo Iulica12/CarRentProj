@@ -25,12 +25,16 @@ namespace CarRentProj.Pages.Cars
         public CarModelIndexData CarD { get; set; }
         public string YearSort { get; set; }
         public string MakeSort { get; set; }
+        public string CurrentFilter { get; set; }
 
-        public async Task OnGetAsync(string sortOrder)
+        public async Task OnGetAsync(string sortOrder, string searchString)
         {
             CarD = new CarModelIndexData();
             MakeSort = String.IsNullOrEmpty(sortOrder) ? "Make_asc" : "";
             YearSort = String.IsNullOrEmpty(sortOrder) ? "Year_desc" : "";
+
+            CurrentFilter = searchString;
+
             CarD.Cars = await _context.Car
                 .Include(b => b.CarModel)
                 .Include(b => b.Make)
@@ -38,9 +42,15 @@ namespace CarRentProj.Pages.Cars
                 .AsNoTracking()
                 .OrderBy(b => b.Year)
                 .ToListAsync();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                CarD.Cars = CarD.Cars.Where(s => s.LicensePlateNumber.Contains(searchString));
+            }
+
             if (_context.Car != null)
             {
-                //Car = await _context.Car.Include(b=>b.Make).Include(m => m.CarModel).Include(c => c.Colour).ToListAsync();
+               // Car = await _context.Cars.Include(b=>b.Make).Include(m => m.CarModel).Include(c => c.Colour).FirstOrDefaultAsync(m=>m.Id == id);
             }
             switch (sortOrder)
             {

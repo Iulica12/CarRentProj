@@ -10,6 +10,15 @@
 <p>
     <a class="btn btn-primary" asp-page="Create">Create New</a>
 </p>
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find Car by Plate Number: <input type="text" name="SearchString" value="@Model.CurrentFilter" /> 
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <a asp-page="./Index">Back to full List</a>
+        </p>
+    </div>
+</form>
 <table class="table text-light">
     <thead>
         <tr>
@@ -29,6 +38,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Car[0].Colour.Name)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Car[0].LicensePlateNumber)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -47,10 +59,13 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Colour.Name)
                 </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LicensePlateNumber)
+                </td>
             <td>
-                <a class = "btn" asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a class="btn" asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                    <a class="btn" asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                <a class = "btn btn-warning" asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a class="btn btn-info" asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                    <a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }

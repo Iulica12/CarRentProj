@@ -22,8 +22,17 @@ namespace CarRentProj.Pages.Rents
 
         public IActionResult OnGet()
         {
-        ViewData["CarID"] = new SelectList(_context.Car, "Id", "LicensePlateNumber");
-        ViewData["MemberID"] = new SelectList(_context.Member, "ID", "ID");
+            var carList = _context.Car
+                .Include(b => b.Make)
+                .Include(b => b.CarModel)
+                .Include(b => b.Colour)
+                .Select(x => new
+                {
+                    x.Id,
+                    CarFull = x.Make.MakeName + " " + x.CarModel.Name + " " + x.Colour.Name + " " + x.LicensePlateNumber
+                });
+            ViewData["CarID"] = new SelectList(carList, "Id", "CarFull");
+            ViewData["MemberID"] = new SelectList(_context.Member, "ID", "FullName");
             return Page();
         }
 
@@ -34,15 +43,7 @@ namespace CarRentProj.Pages.Rents
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            var carList = _context.Car
-                .Include(b => b.Make)
-                .Include(b => b.CarModel)
-                .Include(b => b.Colour)
-                .Select(x => new
-                {
-                    x.Id,
-                    CarFull = x.Make.MakeName +" "+x.CarModel.Name + " " + x.Colour.Name + " " + x.LicensePlateNumber
-                });
+            
           if (!ModelState.IsValid)
             {
                 return Page();

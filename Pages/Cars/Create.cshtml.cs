@@ -8,9 +8,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using CarRentProj.Data;
 using CarRentProj.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace CarRentProj.Pages.Cars
 {
+    [Authorize(Roles = "Admin")]
     public class CreateModel : PageModel
     {
         private readonly CarRentProj.Data.CarRentProjContext _context;

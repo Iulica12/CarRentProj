@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using CarRentProj.Data;
 using CarRentProj.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace CarRentProj.Pages.Cars
 {
+    [Authorize(Roles = "Admin")]
     public class DeleteModel : PageModel
     {
         private readonly CarRentProj.Data.CarRentProjContext _context;

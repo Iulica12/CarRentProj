@@ -11,6 +11,7 @@
 
 </head>
 <body>
+    
     <header>
         <input class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon" />
         <label for="menu-icon"></label>
@@ -34,9 +35,12 @@
                 <li class="nav-item">
                     <a class="nav-link" asp-area="" asp-page="/Rents/Index">Rents</a>
                 </li>
+               
             </ul>
         </nav>
-
+        <nav class="nav2" style="background-color: grey">
+            @Html.Partial("_LoginPartial")
+        </nav>
         <div class="section-center">
         </div>
     </header>
